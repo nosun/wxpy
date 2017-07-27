@@ -57,7 +57,7 @@ class PuidMap(object):
 
         self._thread_lock = threading.Lock()
 
-        if os.path.exists(self.path):
+        if os.path.exists(self.path) and os.path.getsize(self.path):
             self.load()
 
         atexit.register(self.dump)
