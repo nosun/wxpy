@@ -43,6 +43,7 @@ class Message(object):
         self.bot = weakref.proxy(bot)
 
         self._receive_time = datetime.now()
+        self._text = None
 
         # 将 msg.chat.send* 方法绑定到 msg.reply*，例如 msg.chat.send_img => msg.reply_img
         for method in '', '_image', '_file', '_video', '_msg', '_raw_msg':
@@ -105,6 +106,8 @@ class Message(object):
         """
         消息的文本内容
         """
+        if self._text:
+            return self._text
         _type = self.type
         _card = self.card
 
@@ -121,6 +124,10 @@ class Message(object):
         ret = self.raw.get('Text')
         if isinstance(ret, str):
             return ret
+
+    @text.setter
+    def text(self, value):
+        self._text = value
 
     def get_file(self, save_path=None):
         """

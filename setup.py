@@ -23,9 +23,12 @@ setup(
         ]
     },
     install_requires=[
-        'itchat==1.2.32',
+        'itchat',
         'requests',
         'future',
+    ],
+    dependency_links=[
+        'git+https://github.com/dongweiming/itchat.git@signals#egg=itchat-9999999',
     ],
     tests_require=[
         'pytest',
